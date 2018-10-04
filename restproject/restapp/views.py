@@ -34,7 +34,7 @@ def Question(qstring):
         elif(input in {"hello", "hi", "sup","yo", "hey", ""}):
             resp = "Hello! How can I help you today?"
         else:
-            resp = "Sorry, I'm not sure how to answer that. Please check out the UWIT website for more help https://www.uwyo.edu/infotech/"
+            resp = "Sorry, I'm not sure how to answer that. Please check out the UWIT website to speak to a representative https://www.uwyo.edu/infotech/"
 
         return JsonResponse(resp, safe=False)
 
