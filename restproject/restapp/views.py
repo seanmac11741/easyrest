@@ -21,9 +21,9 @@ def Question(qstring):
         #single test case
         if(input == "who is the best?"):
             resp = "sean is the best"
-        elif(input == "computer broke"):
+        elif("broke" in input):
             resp = "Have you tried turning it off and on again?"
-        elif(input == "who is this?"):
+        elif(input in {"who is this?", "who are you?", "are you real?"}):
             resp = "I am the UWIT chatbot!"
         elif(input == "what is the helpdesk number?"):
             resp = "The phone number for the Help Desk is: 307-766-4357"
