@@ -16,10 +16,25 @@ import json
 def Question(qstring):
     try:
         input = qstring.data['data']
-        resp = input
-        if(input == "test1"):
-            resp = "resp1"
-
+        #initialize resp so that it is never null
+        resp = input.lower();
+        #single test case
+        if(input == "who is the best?"):
+            resp = "sean is the best"
+        elif(input == "computer broke"):
+            resp = "Have you tried turning it off and on again?"
+        elif(input == "who is this?"):
+            resp = "I am the UWIT chatbot!"
+        elif(input == "what is the helpdesk number?"):
+            resp = "The phone number for the Help Desk is: 307-766-4357"
+        elif(input == "powder river"):
+            resp = "Let 'R Buck!"
+        elif(input == "where is the knowledge base?"):
+            resp = "Knowledge Base is here: https://uwyo.teamdynamix.com/TDClient/KB/"
+        elif(input in {"hello", "hi", "sup","yo", "hey", ""}):
+            resp = "Hello! How can I help you today?"
+        else:
+            resp = "Sorry, I'm not sure how to answer that. Please check out the UWIT website for more help https://www.uwyo.edu/infotech/"
 
         return JsonResponse(resp, safe=False)
 

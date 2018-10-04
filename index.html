@@ -1,0 +1,143 @@
+<!--Sean McConnell https://github.com/seanmac11741
+Chatbot javascript interface to my rest api for an ai Chatbot -->
+<!DOCTYPE html>
+<html>
+<style>
+body{
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 0 20px;
+}
+/* Chat containers */
+.container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    align: right;
+}
+
+/* Darker chat container */
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+/* Clear floats */
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Style time text */
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+/* Style time text */
+.time-left {
+    float: left;
+    color: #999;
+}
+</style>
+
+
+<head>
+    <title>UWIT AIChatbot</title>
+</head>
+
+<h1>UWIT chatbot Demo</h1>
+
+<body>
+<div id="msgdiv" style="height:300px; width:300px; border:1px solid #ccc;
+            font:16px/26px Georgia, Garamond, Serif;overflow:auto;
+            position:relative; bottom:0;">
+<ul id="messages" style="list-style-type: none">
+  <li>
+  <div class="container" align="right">
+    <p>Hello. How can I help you today?</p>
+  </div>
+  </li>
+</ul>
+</div>
+
+<input id="textbox" type="text">
+<button id="button">Send</button>
+<script type="text/javascript">
+
+var messages = document.getElementById("messages");
+var textbox = document.getElementById("textbox");
+var button = document.getElementById("button");
+var retresp = "init";
+
+function getapiresponse(apipostmsg, cb){
+
+      var data = JSON.stringify({
+      "data": apipostmsg
+    });
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = false;
+
+    xhr.open("POST", "http://127.0.0.1:8000/Question/", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    //xhr.setRequestHeader("Cache-Control", "no-cache");
+
+    xhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status ==200) {
+      console.log(this.responseText);
+      cb(this.responseText);
+    }
+    };
+
+    xhr.send(data);
+};
+
+
+//this function updates the scroll to be at the bottom always
+function updateScroll(){
+  var element = document.getElementById("msgdiv");
+  element.scrollTop = element.scrollHeight;
+};
+
+function responsemessage(input){
+  var newMessage = document.createElement("li");
+  getapiresponse(input, function(responseText) {
+    responseText = responseText.replace(/^"(.*)"$/, '$1');
+    newMessage.innerHTML = responseText;
+    updateScroll();
+  });
+  //newMessage.innerHTML = retresp;
+  newMessage.setAttribute("class", "container");
+  newMessage.setAttribute("align", "right");
+  messages.appendChild(newMessage);
+  textbox.value="";
+  updateScroll();
+};
+
+textbox.addEventListener("keyup", function(e){
+
+  if(e.keyCode ==13){
+    e.preventDefault();
+    document.getElementById("button").click();
+  }
+});
+
+button.addEventListener("click", function(){
+  var newMessage = document.createElement("li");
+  newMessage.innerHTML = textbox.value;
+  newMessage.setAttribute("class", "container darker");
+  messages.appendChild(newMessage);
+  textbox.value="";
+  updateScroll();
+  responsemessage(newMessage.innerHTML);
+})
+
+
+
+</script>
+</body>
+</html>
