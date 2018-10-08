@@ -18,6 +18,7 @@ def Question(qstring):
         input = qstring.data['data']
         #initialize resp so that it is never null
         resp = input.lower();
+        input = input.lower();
         #single test case
         if(input == "who is the best?"):
             resp = "sean is the best"
@@ -33,6 +34,10 @@ def Question(qstring):
             resp = "Knowledge Base is here: https://uwyo.teamdynamix.com/TDClient/KB/"
         elif(input in {"hello", "hi", "sup","yo", "hey", ""}):
             resp = "Hello! How can I help you today?"
+        elif("password reset" in input or "reset my password" in input or "password" in input):
+            resp = "To reset your password, go here: http://www.uwyo.edu/infotech/passreset/"
+        elif(input in {"how do i get email on my phone?"} or "phone" in input):
+            resp = "To get email on your phone, check out this article: http://www.uwyo.edu/infotech/services/email/365.asp"
         else:
             resp = "Sorry, I'm not sure how to answer that. Please check out the UWIT website to speak to a representative https://www.uwyo.edu/infotech/"
 
