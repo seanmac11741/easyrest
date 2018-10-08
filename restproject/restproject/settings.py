@@ -56,6 +56,16 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',    
+)
+
 ROOT_URLCONF = 'restproject.urls'
 
 TEMPLATES = [

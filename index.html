@@ -72,6 +72,8 @@ var messages = document.getElementById("messages");
 var textbox = document.getElementById("textbox");
 var button = document.getElementById("button");
 var retresp = "init";
+var localurl = "http://127.0.0.1:8000/Question/";
+var hurl = "https://hidden-plateau-61215.herokuapp.com/Question/"
 
 function getapiresponse(apipostmsg, cb){
 
@@ -82,7 +84,7 @@ function getapiresponse(apipostmsg, cb){
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = false;
 
-    xhr.open("POST", "http://127.0.0.1:8000/Question/", true);
+    xhr.open("POST", localurl, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     //xhr.setRequestHeader("Cache-Control", "no-cache");
 
